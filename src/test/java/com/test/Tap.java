@@ -45,15 +45,23 @@ public class Tap {
 
     //Function for Tap
     private void tap (AndroidDriver driver, WebElement element){
+
+        //Find center of the screen
         Point location = element.getLocation();
         Dimension size = element.getSize();
         Point centerOfElements = getCenterOfElements(location,size);
 
+
+        //Used our finger
         PointerInput finger1 =new PointerInput(PointerInput.Kind.TOUCH, "finger1");
         Sequence sequence = new Sequence(finger1, 1)
+                //Moved finger to center of the screen
                 .addAction(finger1.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), centerOfElements))
+                //Pressed on the center of the screen
                 .addAction(finger1.createPointerDown(PointerInput.MouseButton.LEFT.asArg()))
+                //Waited for 200ms
                 .addAction(new Pause(finger1, Duration.ofMillis(200)))
+                //Lifted up the finger from the screen
                 .addAction(finger1.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
 
         driver.perform(Collections.singletonList(sequence));
