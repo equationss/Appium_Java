@@ -4,20 +4,20 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.remote.AutomationName;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.*;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Pause;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 import java.util.Collections;
 
-public class Tap {
+public class DoubleTap {
 
     @Test
     public void ScreenTap() throws MalformedURLException, InterruptedException {
@@ -38,13 +38,12 @@ public class Tap {
         Thread.sleep(4000);
 
         WebElement openMenu = driver.findElement(AppiumBy.accessibilityId("open menu"));
-        tap(driver, openMenu);
+        doubleTap(driver, openMenu);
 
     }
 
-
-    //Function for Tap
-    private void tap (AndroidDriver driver, WebElement element){
+    //Function for DoubleTap
+    private void doubleTap (AndroidDriver driver, WebElement element){
 
         //Find center of the screen
         Point location = element.getLocation();
@@ -59,9 +58,17 @@ public class Tap {
                 .addAction(finger1.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), centerOfElements))
                 //Pressed on the center of the screen
                 .addAction(finger1.createPointerDown(PointerInput.MouseButton.LEFT.asArg()))
-                //Waited for 200ms
-                .addAction(new Pause(finger1, Duration.ofMillis(200)))
+                //Waited for 100ms
+                .addAction(new Pause(finger1, Duration.ofMillis(100)))
                 //Lifted up the finger from the screen
+                .addAction(finger1.createPointerUp(PointerInput.MouseButton.LEFT.asArg()))
+                //Waited for 100ms
+                .addAction(new Pause(finger1, Duration.ofMillis(100)))
+                //Again pressed on the center of the screen
+                .addAction(finger1.createPointerDown(PointerInput.MouseButton.LEFT.asArg()))
+                //Waited for 100ms
+                .addAction(new Pause(finger1, Duration.ofMillis(100)))
+                //Again lifted up the finger from the screen
                 .addAction(finger1.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
 
         //Completed our action
