@@ -42,6 +42,8 @@ public class Tap {
 
     }
 
+
+    //Function for Tap
     private void tap (AndroidDriver driver, WebElement element){
         Point location = element.getLocation();
         Dimension size = element.getSize();
