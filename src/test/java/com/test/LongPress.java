@@ -10,9 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Pause;
-import org.openqa.selenium.interactions.PointerInput;
-import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.interactions.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.MalformedURLException;
@@ -46,12 +44,16 @@ public class LongPress {
         driver.findElement(AppiumBy.xpath(".//*[@text='Expandable Lists']")).click();
         driver.findElement(AppiumBy.xpath(".//*[@text='1. Custom Adapter']")).click();
         WebElement element = driver.findElement(AppiumBy.xpath(".//*[@text='People Names']"));
-        //new Actions(driver).clickAndHold(element).perform();
-        longPress(driver, element);
+
+        //Sequence class function
+        //longPress(driver, element);
+
+        //Another function-less way to perform longPress
+        new Actions(driver).clickAndHold(element).perform();
 
     }
 
-    //Function for Tap
+    //Function for LongPress
     private void longPress (AndroidDriver driver, WebElement element){
 
         //Find center of the screen
