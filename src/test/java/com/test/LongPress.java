@@ -40,6 +40,7 @@ public class LongPress {
         Thread.sleep(4000);
 
 
+        //App Interaction
         driver.findElement(AppiumBy.xpath(".//*[@text='Views']")).click();
         driver.findElement(AppiumBy.xpath(".//*[@text='Expandable Lists']")).click();
         driver.findElement(AppiumBy.xpath(".//*[@text='1. Custom Adapter']")).click();
